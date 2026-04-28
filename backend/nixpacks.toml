@@ -1,5 +1,0 @@
-[phases.setup]
-nixPkgs = ["python312", "gcc", "pkg-config", "mysqlclient"]
-
-[phases.install]
-cmds = ["pip install mysqlclient==2.2.8 -r requirements.txt"]

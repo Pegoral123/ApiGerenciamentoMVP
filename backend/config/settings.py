@@ -1,9 +1,9 @@
+import pymysql
+pymysql.install_as_MySQLdb()
+
 import os
 from datetime import timedelta
-
 import dj_database_url
-import pymysql                    
-pymysql.install_as_MySQLdb() 
 from decouple import config
 
 # Base
@@ -86,9 +86,11 @@ if DATABASE_URL:
         'default': dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
-            engine='django.db.backends.mysql',  # ← força o engine
         )
     }
+    # Força o PyMySQL como backend
+    DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+    DATABASES['default']['OPTIONS'] = {'charset': 'utf8mb4'}
 else:
     DATABASES = {
         'default': {
@@ -98,6 +100,7 @@ else:
             'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST': config('DB_HOST', default='127.0.0.1'),
             'PORT': config('DB_PORT', default='3306'),
+            'OPTIONS': {'charset': 'utf8mb4'},
         }
     }
 
