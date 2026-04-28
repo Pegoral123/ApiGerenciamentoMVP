@@ -2,6 +2,8 @@ import os
 from datetime import timedelta
 
 import dj_database_url
+import pymysql                    
+pymysql.install_as_MySQLdb() 
 from decouple import config
 
 # Base
